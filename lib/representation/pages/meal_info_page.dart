@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/models/mealsFunctions.dart';
+import 'package:meals_app/data/models/meals.dart';
 import 'package:meals_app/representation/pages/meals_page.dart';
 
 import '../../data/data_source/meals_data.dart';
 
 class MealInfoPage extends StatelessWidget {
-  final int index;
-  final int pageIndex;
-  const MealInfoPage({super.key, required this.index,required this.pageIndex});
+final Meal meal ;
+  const MealInfoPage({super.key, required this.meal});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
-        leading: IconButton(
-            icon: const Icon(Icons.arrow_back_outlined,color: Colors.white,),
-          onPressed: (){
-              Navigator.pop(context);
-          },
-        ),
         title:Text(
-            MealsFunctions.getMealNameByPageIndex(pageIndex, index),
+           meal.name,
           style: const TextStyle(
             color: Colors.white
           ),
@@ -32,7 +25,7 @@ class MealInfoPage extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              MealsFunctions.getImageUrlByPageIndex(pageIndex, index),
+              meal.imageUrl,
               fit: BoxFit.cover,
             ),
             const SizedBox(height:16 ,),
@@ -48,7 +41,7 @@ class MealInfoPage extends StatelessWidget {
               height: 8,
             ),
             Text(
-              MealsFunctions.getIngredientsByPageIndex(pageIndex, index),
+              meal.ingredients,
               style: const TextStyle(
                   color: Colors.white38,
                 fontSize: 16
@@ -69,7 +62,7 @@ class MealInfoPage extends StatelessWidget {
               height: 8,
             ),
             Text(
-              MealsFunctions.getStepsByPageIndex(pageIndex, index),
+              meal.steps,
               style: const TextStyle(
                 color: Colors.white38,
                 fontSize: 16
