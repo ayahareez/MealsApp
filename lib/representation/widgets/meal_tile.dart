@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/models/meals.dart';
+import 'package:meals_app/data/models/mealsFunctions.dart';
 import 'package:meals_app/representation/pages/meal_info_page.dart';
 
 class MealTile extends StatelessWidget {
-  final Meal meal ;
-  const MealTile({super.key, required this.meal});
+  final int index;//which item in the list
+  final int pageIndex;//which list
+  const MealTile({super.key, required this.index,required this.pageIndex});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>MealInfoPage(meal:meal)));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>MealInfoPage(index: index, pageIndex: pageIndex)));
       },
       child: Container(
         padding: const EdgeInsetsDirectional.all(8),
@@ -25,7 +26,7 @@ class MealTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                  meal.name,
+                  MealsFunctions.getMealNameByPageIndex(pageIndex, index),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -38,7 +39,7 @@ class MealTile extends StatelessWidget {
                     children: [
                       const Icon(Icons.access_time_outlined,color: Colors.white,),
                       Text(
-                        meal.time,
+                        MealsFunctions.getMealTimeByPageIndex(pageIndex, index),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16
@@ -48,7 +49,7 @@ class MealTile extends StatelessWidget {
                       const SizedBox(width: 8,),
                       const Icon(Icons.shopping_bag_rounded,color: Colors.white,),
                       Text(
-                       meal.difficulty,
+                        MealsFunctions.getMealDifficultyByPageIndex(pageIndex, index),
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16
@@ -57,7 +58,7 @@ class MealTile extends StatelessWidget {
                       const SizedBox(width: 8,),
                       const Icon(Icons.attach_money_rounded,color: Colors.white,),
                       Text(
-                       meal.standard,
+                        MealsFunctions.getMealStandardByPageIndex(pageIndex, index),
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -69,7 +70,7 @@ class MealTile extends StatelessWidget {
               ),
             ),
               child: Image.asset(
-                meal.imageUrl,
+                MealsFunctions.getImageUrlByPageIndex(pageIndex, index),
                 fit: BoxFit.cover,
               ),
           ),

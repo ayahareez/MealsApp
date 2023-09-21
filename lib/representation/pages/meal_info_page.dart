@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/models/meals.dart';
+import 'package:meals_app/data/models/mealsFunctions.dart';
 import 'package:meals_app/representation/pages/meals_page.dart';
 
 import '../../data/data_source/meals_data.dart';
 
 class MealInfoPage extends StatelessWidget {
-final Meal meal ;
-  const MealInfoPage({super.key, required this.meal});
+  final int index;
+  final int pageIndex;
+  const MealInfoPage({super.key, required this.index,required this.pageIndex});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back_outlined,color: Colors.white,),
+          onPressed: (){
+              Navigator.pop(context);
+          },
+        ),
         title:Text(
-           meal.name,
+            MealsFunctions.getMealNameByPageIndex(pageIndex, index),
           style: const TextStyle(
             color: Colors.white
           ),
@@ -25,7 +32,7 @@ final Meal meal ;
         child: Column(
           children: [
             Image.asset(
-              meal.imageUrl,
+              MealsFunctions.getImageUrlByPageIndex(pageIndex, index),
               fit: BoxFit.cover,
             ),
             const SizedBox(height:16 ,),
@@ -41,7 +48,7 @@ final Meal meal ;
               height: 8,
             ),
             Text(
-              meal.ingredients,
+              MealsFunctions.getIngredientsByPageIndex(pageIndex, index),
               style: const TextStyle(
                   color: Colors.white38,
                 fontSize: 16
@@ -62,7 +69,7 @@ final Meal meal ;
               height: 8,
             ),
             Text(
-              meal.steps,
+              MealsFunctions.getStepsByPageIndex(pageIndex, index),
               style: const TextStyle(
                 color: Colors.white38,
                 fontSize: 16
