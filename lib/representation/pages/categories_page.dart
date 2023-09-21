@@ -50,12 +50,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   index=value;
                 });
                 },
-                items:[
-                  const BottomNavigationBarItem(
+                items:const [
+                  BottomNavigationBarItem(
                       icon: Icon(Icons.set_meal,color: Colors.white38,),
                     label: 'Categories',
                   ),
-                  const BottomNavigationBarItem(
+                  BottomNavigationBarItem(
                       icon: Icon(Icons.favorite,color: Colors.white38,),
                     label: 'Favorite',
                   )
