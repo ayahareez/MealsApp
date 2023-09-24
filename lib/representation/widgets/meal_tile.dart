@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/data/models/meals.dart';
 import 'package:meals_app/representation/pages/meal_info_page.dart';
+import 'package:provider/provider.dart';
+
+import '../../data/models/meal_provider.dart';
 
 class MealTile extends StatelessWidget {
-  final Meal meal ;
-  const MealTile({super.key, required this.meal});
+  final Meal meal;
+
+ MealTile({super.key, required this.meal});
+
+  bool fav = false;
+
   @override
   Widget build(BuildContext context) {
+    final mealProvider = Provider.of<MealProvider>(context);//object
+    final isFavorite = mealProvider.isMealFavorite(meal);//جواها ولا لا ال  meal دي
+
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>MealInfoPage(meal:meal)));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MealInfoPage(meal: meal)));
       },
       child: Container(
         padding: const EdgeInsetsDirectional.all(8),
@@ -17,61 +30,85 @@ class MealTile extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: GridTile(
-              footer: Container(
-              height: 70,
+            footer: Container(
+              height: 100,
               color: Colors.black.withOpacity(0.7),
               padding: const EdgeInsetsDirectional.all(8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                  meal.name,
+                    meal.name,
                     style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600
-                    ),
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(height: 4,),
+                  const SizedBox(
+                    height: 4,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.access_time_outlined,color: Colors.white,),
+                      const Icon(
+                        Icons.access_time_outlined,
+                        color: Colors.white,
+                      ),
                       Text(
                         meal.time,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      const Icon(
+                        Icons.shopping_bag_rounded,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        meal.difficulty,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      const Icon(
+                        Icons.attach_money_rounded,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        meal.standard,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 16
-                        ),
-
-                      ),
-                      const SizedBox(width: 8,),
-                      const Icon(Icons.shopping_bag_rounded,color: Colors.white,),
-                      Text(
-                       meal.difficulty,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16
+                          fontSize: 16,
                         ),
                       ),
-                      const SizedBox(width: 8,),
-                      const Icon(Icons.attach_money_rounded,color: Colors.white,),
-                      Text(
-                       meal.standard,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                        ),
+                      Checkbox(
+                        value: isFavorite,
+                        onChanged: (value) {
+                          mealProvider.toggleFavorite(meal);
+                          // setState(() {
+                          //   if(value==true){
+                          //     favMeals.add(widget.meal);
+                          //   }
+                          //   else if(value==false){
+                          //     favMeals.remove(widget.meal);
+                          //   }
+                         // }
+                         // );
+                        },
                       ),
                     ],
                   )
                 ],
               ),
             ),
-              child: Image.asset(
-                meal.imageUrl,
-                fit: BoxFit.cover,
-              ),
+            child: Image.asset(
+              meal.imageUrl,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
@@ -219,4 +256,3 @@ class MealTile extends StatelessWidget {
 //       return '';
 //   }
 // }
-

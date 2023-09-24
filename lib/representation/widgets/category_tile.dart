@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:meals_app/data/data_source/categories.dart';
-import 'package:meals_app/data/models/category.dart';
 import 'package:meals_app/representation/pages/meals_page.dart';
 
 class CategoryTile extends StatelessWidget {

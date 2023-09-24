@@ -30,7 +30,7 @@ final Meal meal ;
             ),
             const SizedBox(height:16 ,),
             const Text(
-              'Ingrediants',
+              'Ingredients',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,

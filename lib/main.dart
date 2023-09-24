@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/representation/pages/categories_page.dart';
 import 'package:meals_app/representation/pages/meals_page.dart';
+import 'package:meals_app/representation/pages/page_controller.dart';
 import 'package:meals_app/representation/widgets/meal_tile.dart';
+import 'package:provider/provider.dart';
+
+import 'data/models/meal_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,15 +17,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
+    return ChangeNotifierProvider(
+      create: (context) => MealProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: ControllerPage(),
       ),
-      home: CategoriesPage(),
     );
   }
 }
