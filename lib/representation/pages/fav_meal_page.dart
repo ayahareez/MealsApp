@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:meals_app/data/models/meal_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/meal_tile.dart';
 
@@ -12,10 +13,12 @@ class FavoriteMealsPage extends StatelessWidget {
     return Scaffold(
         body:Container(
           color: Colors.black,
-          child: ListView.separated(
-              itemBuilder: (_,i)=>MealTile(meal: MealProvider.favoriteMeals.elementAt(i)),
-              separatorBuilder:(_,i)=>const SizedBox(height: 16,),
-              itemCount: MealProvider.favoriteMeals.length),
+          child: Consumer<MealProvider>(
+            builder: (context,favModel,child)=>ListView.separated(
+                itemBuilder: (_,i)=>MealTile(meal: MealProvider.favoriteMeals.elementAt(i)),
+                separatorBuilder:(_,i)=>const SizedBox(height: 16,),
+                itemCount: MealProvider.favoriteMeals.length),
+          ),
         ),
     );
   }

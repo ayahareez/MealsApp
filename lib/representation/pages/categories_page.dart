@@ -94,16 +94,34 @@ class _CategoriesPageState extends State<CategoriesPage> {
                               ),
                             )),
                         const SizedBox(height: 8,),
+                        // TextFormTile(
+                        //     controller: colorController,
+                        //     type: TextInputType.number,
+                        //     decoration: const InputDecoration(
+                        //   labelText: "Enter The Category Color",
+                        //   border: OutlineInputBorder(),
+                        //   prefix: Icon(
+                        //     Icons.title,
+                        //   ),
+                        // )),
                         TextFormTile(
-                            controller: colorController,
+                            controller: idController,
                             type: TextInputType.number,
+                          function: (value) {
+                            if (value!.isEmpty) {
+                              return 'category id must be entered';
+                            }
+                            return null;
+                          },
                             decoration: const InputDecoration(
-                          labelText: "Enter The Category Color",
-                          border: OutlineInputBorder(),
-                          prefix: Icon(
-                            Icons.title,
-                          ),
-                        )),
+                              labelText: "Enter The Category ID",
+                              border: OutlineInputBorder(),
+                              prefix: Icon(
+                                Icons.title,
+                              ),
+                            ),
+
+                        )
                       ],
                     ),
                   ),

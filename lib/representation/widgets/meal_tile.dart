@@ -8,7 +8,7 @@ import '../../data/models/meal_provider.dart';
 class MealTile extends StatelessWidget {
   final Meal meal;
 
- MealTile({super.key, required this.meal});
+  MealTile({super.key, required this.meal});
 
   bool fav = false;
 
@@ -85,20 +85,22 @@ class MealTile extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      Checkbox(
-                        value: isFavorite,
-                        onChanged: (value) {
-                          mealProvider.toggleFavorite(meal);
-                          // setState(() {
-                          //   if(value==true){
-                          //     favMeals.add(widget.meal);
-                          //   }
-                          //   else if(value==false){
-                          //     favMeals.remove(widget.meal);
-                          //   }
-                         // }
-                         // );
-                        },
+                      Consumer<MealProvider>(
+                        builder:(context,favModel,child)=> Checkbox(
+                          value: isFavorite,
+                          onChanged: (value) {
+                            mealProvider.toggleFavorite(meal);
+                            // setState(() {
+                            //   if(value==true){
+                            //     favMeals.add(widget.meal);
+                            //   }
+                            //   else if(value==false){
+                            //     favMeals.remove(widget.meal);
+                            //   }
+                           // }
+                           // );
+                          },
+                        ),
                       ),
                     ],
                   )

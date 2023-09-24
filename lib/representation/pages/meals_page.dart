@@ -241,22 +241,22 @@ class _MealsPageState extends State<MealsPage> {
                             const SizedBox(
                               height: 8,
                             ),
-                            TextFormTile(
-                                controller: idController,
-                                type: TextInputType.number,
-                                function:(value) {
-                                  if (value!.isEmpty) {
-                                    //this msg must be unique
-                                    return 'meal id must be entered';
-                                  }
-                                  return null;
-                                }, decoration: const InputDecoration(
-                              labelText: "enter the meal id",
-                              border: OutlineInputBorder(),
-                              prefix: Icon(
-                                Icons.watch_later,
-                              ),
-                            )),
+                            // TextFormTile(
+                            //     controller: idController,
+                            //     type: TextInputType.number,
+                            //     function:(value) {
+                            //       if (value!.isEmpty) {
+                            //         //this msg must be unique
+                            //         return 'meal id must be entered';
+                            //       }
+                            //       return null;
+                            //     }, decoration: const InputDecoration(
+                            //   labelText: "enter the meal id",
+                            //   border: OutlineInputBorder(),
+                            //   prefix: Icon(
+                            //     Icons.watch_later,
+                            //   ),
+                            // )),
                           ],
                         ),
                       ),
